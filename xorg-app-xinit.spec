@@ -1,12 +1,12 @@
 Summary:	xinit application
 Summary(pl):	Aplikacja xinit
 Name:		xorg-app-xinit
-Version:	0.99.2
+Version:	0.99.3
 Release:	0.1
 License:	MIT
 Group:		X11/Applications
-Source0:	http://xorg.freedesktop.org/releases/X11R7.0-RC1/app/xinit-%{version}.tar.bz2
-# Source0-md5:	c1934c751cd949c1a9afa3104a7ef357
+Source0:	http://xorg.freedesktop.org/releases/X11R7.0-RC2/app/xinit-%{version}.tar.bz2
+# Source0-md5:	4ab49af18d4c48a3cfc31ab59d248841
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
 BuildRequires:	automake
