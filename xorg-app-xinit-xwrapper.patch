@@ -1,0 +1,33 @@
+--- startx.cpp	2005-11-15 05:03:10.000000000 +0100
++++ startx.cpp	2005-12-22 10:53:22.620963000 +0100
+@@ -65,7 +65,7 @@
+ userserverrc=$HOME/.xserverrc
+ sysserverrc=XINITDIR/xserverrc
+ defaultclient=XTERM
+-defaultserver=XSERVER
++defaultserver=BINDIR/Xwrapper
+ defaultclientargs=""
+ defaultserverargs=""
+ clientargs=""
+--- xinit.c	2005-10-04 03:27:34.000000000 +0200
++++ xinit.c	2005-12-22 10:50:53.630963000 +0100
+@@ -156,6 +156,7 @@
+ #define	OK_EXIT		0
+ #define	ERR_EXIT	1
+ 
++char *default_wrapper = BINDIR "/Xwrapper";
+ char *default_server = "X";
+ char *default_display = ":0";		/* choose most efficient */
+ char *default_client[] = {"xterm", "-geometry", "+1+1", "-n", "login", NULL};
+@@ -346,7 +347,10 @@
+ 	if (argc == 0 ||
+ #ifndef __UNIXOS2__
+ 	    (**argv != '/' && **argv != '.')) {
+-		*sptr++ = default_server;
++		if (access(default_wrapper, X_OK) == 0)
++			*sptr++ = default_wrapper;
++		else
++			*sptr++ = default_server;
+ #else
+ 	    (**argv != '/' && **argv != '\\' && **argv != '.' &&
+ 	     !(isalpha(**argv) && (*argv)[1]==':'))) {
