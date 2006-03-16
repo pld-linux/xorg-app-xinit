@@ -16,6 +16,7 @@ BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-util-util-macros >= 0.99.2
 Requires:	xorg-app-xauth
+Requires:	xorg-lib-libXdmcp
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
