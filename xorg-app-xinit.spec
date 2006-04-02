@@ -1,12 +1,16 @@
+# FIXME:
+# - /etc/X11/xinit vs /usr/lib{,64}/X11/xinit
+# - make it compatible with xinitrc-ng
+#
 Summary:	xinit application
 Summary(pl):	Aplikacja xinit
 Name:		xorg-app-xinit
-Version:	1.0.1
-Release:	0.3
+Version:	1.0.2
+Release:	0.1
 License:	MIT
 Group:		X11/Applications
-Source0:	http://xorg.freedesktop.org/releases/X11R7.0/src/app/xinit-%{version}.tar.bz2
-# Source0-md5:	8c353e39389edbdffc5387acc24948a0
+Source0:	http://xorg.freedesktop.org/releases/individual/app/xinit-%{version}.tar.bz2
+# Source0-md5:	d591fafe69b57969b0521c461073a01f
 Patch0:		%{name}-xwrapper.patch
 URL:		http://xorg.freedesktop.org/
 BuildRequires:	autoconf >= 2.57
