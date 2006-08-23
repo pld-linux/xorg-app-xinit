@@ -6,7 +6,7 @@ Summary:	xinit application
 Summary(pl):	Aplikacja xinit
 Name:		xorg-app-xinit
 Version:	1.0.2
-Release:	0.2
+Release:	0.3
 License:	MIT
 Group:		X11/Applications
 Source0:	http://xorg.freedesktop.org/releases/individual/app/xinit-%{version}.tar.bz2
@@ -31,6 +31,19 @@ xinit application.
 %description -l pl
 Aplikacja xinit.
 
+%package xinitrc
+Summary:	xinitrc script provided by Xorg
+Summary(pl):	Skrypt xinitrc dostarczany z dystrybucj± Xorg
+Group:		X11
+Provides:	xinitrc
+Obsoletes:	xinitrc
+
+%description xinitrc
+xinitrc script provided by Xorg.
+
+%description xinitrc -l pl
+Skrypt xinitrc dostarczany z dystrybucj± Xorg.
+
 %prep
 %setup -q -n xinit-%{version}
 %patch0 -p0
@@ -51,9 +64,6 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-# this is supposed to be provided by xinitrc*
-rm -rf $RPM_BUILD_ROOT/etc/X11/xinit
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -62,3 +72,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc COPYING ChangeLog README
 %attr(755,root,root) %{_bindir}/*
 %{_mandir}/man1/*.1x*
+
+%files xinitrc
+%defattr(644,root,root,755)
+%attr(755,root,root) /etc/X11/xinit/*
