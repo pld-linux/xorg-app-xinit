@@ -1,0 +1,152 @@
+.\" $XConsortium: startx.man /main/8 1996/12/09 17:09:15 kaleb $
+.\" Copyright (c) 1993  X Consortium
+.\" 
+.\" $XFree86: xc/programs/xinit/startx.man,v 1.1.1.3.2.2 1998/11/05 19:38:35 hohndel Exp $
+.\"
+.\" Permission is hereby granted, free of charge, to any person obtaining
+.\" a copy of this software and associated documentation files (the
+.\" "Software"), to deal in the Software without restriction, including
+.\" without limitation the rights to use, copy, modify, merge, publish,
+.\" distribute, sublicense, and/or sell copies of the Software, and to
+.\" permit persons to whom the Software is furnished to do so, subject to
+.\" the following conditions:
+.\" 
+.\" The above copyright notice and this permission notice shall be included
+.\" in all copies or substantial portions of the Software.
+.\" 
+.\" THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+.\" OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+.\" MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+.\" IN NO EVENT SHALL THE X CONSORTIUM BE LIABLE FOR ANY CLAIM, DAMAGES OR
+.\" OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE,
+.\" ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+.\" OTHER DEALINGS IN THE SOFTWARE.
+.\" 
+.\" Except as contained in this notice, the name of the X Consortium shall
+.\" not be used in advertising or otherwise to promote the sale, use or
+.\" other dealings in this Software without prior written authorization
+.\" from the X Consortium.
+.\"
+.\" Traduzione di Alessandro Passerini <bav4934@iperbole.bologna.it>
+.\" Gennaio 1999
+.TH STARTX 1 "Release 6.3" "X Version 11"
+.SH NOME
+startx \- inizializza una sessione X
+.SH SINTASSI
+.B startx
+[ [
+.I client
+]
+.I opzioni
+\&\.\|.\|. ] [
+.B \-\^\-
+[
+.I server
+]
+.I opzioni
+\&.\|.\|. ]
+.SH DESCRIZIONE
+NOTA: Lo script \fIstartx\fP fornito con la distribuzione X11 è un esempio 
+progettato più come base per una personalizzazione piuttosto che come prodotto finito.
+Gli amministratori di sistema sono esortati a personalizzarlo per il loro sito.
+E ad aggiornare questa pagina di manuale una volta fatto!
+.PP
+Lo script \fIstartx\fP è un interfaccia per \fIxinit\fP che fornisce all'utente
+un metodo più semplice per il lancio di una singola sessione dell'X Window System.
+Normalmente viene lanciato senza argomenti.
+.PP
+Un eccezione importante è il caso il cui venga impostata una differente
+profondità di colore. Siccome questo implica il passaggio di un argomento al
+server, l'opzione deve essere preceduta da
+.RB `--'
+(vedere la pagina di manuale
+.IR xinit(1)
+per maggiori dettagli sull'argomento). Per lanciare il server
+in 16bpp si utilizza
+.sp
+startx -- -bpp 16
+.PP
+Per determinare quale client lanciare,
+.I startx
+per prima cosa ricerca un file chiamato
+.I .xinitrc
+nella home directory dell'utente. Se questo non viene trovato, utilizza il file
+.I xinitrc
+nella directory di libreria di \fIxinit\fP.
+Le eventuali opzioni per il client nella riga di comando hanno la precedenza
+su questo comportamento.
+Per determinare quale server lanciare,
+.I startx
+per prima cosa cerca un file chiamato
+.I .xserverrc
+nella home directory dell'utente. Se questo non viene trovato, utilizza
+il file
+.I xserverrc
+nella directory di libreria di \fIxinit\fP.
+Le eventuali opzioni per il server nella riga di comando hanno la precedenza
+su questo comportamento.
+Raramente gli utenti devono fornire un file \fI.xserverrc\fP.
+Vedere la pagina di manuale
+.IR xinit (1)
+per maggiori dettagli sull'argomento.
+.PP
+Il file
+.I .xinitrc
+è tipicamente uno shell script che lancia diversi client a seconda delle preferenze dell'utente.
+Quando questo shell script esce,
+.I startx 
+termina il server ed esegue ogni altro shutdown di sessione necessario.
+La maggior parte dei client lanciati da
+.I .xinitrc
+dovrebbero essere eseguiti in background.  L'ultimo client dovrebbe essere eseguito in foreground;
+quando questo termina, termina anche la sessione. Gli utenti spesso scelgono un session manager,
+un window manager, o \fIxterm\fP quale client "magico".
+.SH ESEMPIO
+.PP
+Di seguito è riportato un esempio di \fI\.xinitrc\fP che carica diverse applicazioni e
+lascia il window manager in esecuzione come "ultima" applicazione. Supponendo che il
+window manager sia stato correttamente configurato, l'utente può scegliere la voce
+di menu ``Exit'' per fare lo shutdown di X.
+.sp
+.in +4
+.nf
+xrdb  \-load  $HOME/.Xresources
+xsetroot  \-solid  gray  &
+xbiff  \-geometry  \-430+5  &
+oclock  \-geometry  75x75\-0\-0  &
+xload  \-geometry  \-80\-0  &
+xterm  \-geometry  +0+60  \-ls  &
+xterm  \-geometry  +0\-100  &
+xconsole  \-geometry  \-0+0  \-fn  5x7  &
+exec  twm
+.fi
+.in -4
+.SH "VARIABILI DI AMBIENTE"
+.TP 25
+DISPLAY
+Questa variabile viene impostata al nome del display a cui i client dovrebbero
+connettersi.
+Notare che questa variabile viene
+.I impostata,
+non letta.
+.SH FILE
+.TP 25
+.I $(HOME)/.xinitrc
+Il client da lanciare. Normalmente è uno shell script che lancia diversi programmi in background.
+.TP 25
+.I $(HOME)/.xserverrc
+Il server da lanciare. Il predefinito è
+.I X.
+.TP 25
+.I <XRoot>/lib/X11/xinit/xinitrc
+Il client da lanciare se l'utente non ha un file \fI.xinitrc\fP.
+<XRoot> si riferisce alla root dell'albero di installazione di X11.
+.TP 25
+.I <XRoot>/lib/X11/xinit/xserverrc
+Il server da lanciare se l'utente l'utente non ha un file \fI.xserverrc\fP.
+Questo file è necessario solo se il server necessita di argomenti speciali
+o se non è specificato. <XRoot> si riferisce alla root dell'albero di installazione di X11.
+.SH "VEDERE ANCHE"
+.IR xinit (1)
+.SH AUTORE
+Traduzione di Alessandro Passerini (bav4934@iperbole.bologna.it)
