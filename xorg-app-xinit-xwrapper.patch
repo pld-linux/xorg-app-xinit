@@ -9,17 +9,6 @@
  	-DSHELL_CMD=$(SHELL_CMD) $(STARTX_COOKIE_FLAGS)
  
  xinitrc: xinitrc.cpp
---- Makefile.in	2006-02-13 18:53:05.000000000 +0100
-+++ Makefile.in	2006-02-13 18:56:59.268373000 +0100
-@@ -283,7 +283,7 @@
- 	-DXINIT=@XINIT@
- 
- SCRIPTDEFS = \
--	-DXINITDIR=$(XINITDIR) $(PROGCPPDEFS) -DLIBDIR=$(libdir) \
-+	-DXINITDIR=$(XINITDIR) $(PROGCPPDEFS) -DBINDIR=$(bindir) -DLIBDIR=$(libdir) \
- 	-DSHELL_CMD=$(SHELL_CMD) $(STARTX_COOKIE_FLAGS)
- 
- xinitrc_DATA = xinitrc
 --- startx.cpp	2005-11-15 05:03:10.000000000 +0100
 +++ startx.cpp	2005-12-22 10:53:22.620963000 +0100
 @@ -65,7 +65,7 @@
