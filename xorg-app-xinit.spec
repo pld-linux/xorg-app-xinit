@@ -2,7 +2,7 @@
 # - make it compatible with xinitrc-ng
 #
 Summary:	xinit application
-Summary(pl.UTF-8):   Aplikacja xinit
+Summary(pl.UTF-8):	Aplikacja xinit
 Name:		xorg-app-xinit
 Version:	1.0.3
 Release:	0.1
@@ -36,7 +36,7 @@ Aplikacja xinit.
 
 %package xinitrc
 Summary:	xinitrc script provided by Xorg
-Summary(pl.UTF-8):   Skrypt xinitrc dostarczany z dystrybucją Xorg
+Summary(pl.UTF-8):	Skrypt xinitrc dostarczany z dystrybucją Xorg
 Group:		X11
 Provides:	xinitrc
 Obsoletes:	xinitrc
