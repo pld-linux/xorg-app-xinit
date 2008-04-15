@@ -1,11 +1,12 @@
 # FIXME:
 # - make it compatible with xinitrc-ng
+#   for example: /etc/X11/kdm/Xsession: line 42: exec: /etc/X11/xinit/Xclients: cannot execute: No such file or directory
 #
 Summary:	xinit application - X Window System initializer
 Summary(pl.UTF-8):	Aplikacja xinit do uruchamiania X Window System
 Name:		xorg-app-xinit
 Version:	1.0.8
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Applications
 Source0:	http://xorg.freedesktop.org/releases/individual/app/xinit-%{version}.tar.bz2
@@ -98,6 +99,9 @@ rm -rf $RPM_BUILD_ROOT
 %lang(pl) %{_mandir}/pl/man1/startx.1x*
 %lang(pl) %{_mandir}/pl/man1/xinit.1x*
 
+%if 0
+# Not finished. see TODO at start of spec
 %files xinitrc
 %defattr(644,root,root,755)
 %attr(755,root,root) /etc/X11/xinit/xinitrc
+%endif
