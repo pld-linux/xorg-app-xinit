@@ -5,12 +5,12 @@
 Summary:	xinit application - X Window System initializer
 Summary(pl.UTF-8):	Aplikacja xinit do uruchamiania X Window System
 Name:		xorg-app-xinit
-Version:	1.1.0
+Version:	1.1.1
 Release:	1
 License:	MIT
 Group:		X11/Applications
 Source0:	http://xorg.freedesktop.org/releases/individual/app/xinit-%{version}.tar.bz2
-# Source0-md5:	9144097186c3d2454beffe8ac3b53c6e
+# Source0-md5:	93c73705ed9eb1e1a6b6938405672f2b
 Source1:	startx.1x.it
 Source2:	startx.1x.pl
 Source3:	xinit.1x.it
