@@ -1,18 +1,3 @@
-diff --git a/Makefile.am b/Makefile.am
-index babc2f3..9b912a3 100644
---- a/Makefile.am
-+++ b/Makefile.am
-@@ -24,8 +24,8 @@ XINITDIR = $(libdir)/X11/xinit
- bin_PROGRAMS = xinit
- bin_SCRIPTS = startx
- 
--xinit_CFLAGS = $(XINIT_CFLAGS) -DXINITDIR=\"$(XINITDIR)\" -DBINDIR=\"$(bindir)\"
--xinit_LDADD = $(XINIT_LIBS)
-+xinit_CFLAGS = $(XINIT_CFLAGS) $(CK_CFLAGS) -DXINITDIR=\"$(XINITDIR)\" -DBINDIR=\"$(bindir)\"
-+xinit_LDADD = $(XINIT_LIBS) $(CK_LIBS)
- 
- xinit_SOURCES =	\
-         xinit.c
 diff --git a/configure.ac b/configure.ac
 index 1aee1d2..5775db3 100644
 --- a/configure.ac
@@ -25,7 +10,7 @@ index 1aee1d2..5775db3 100644
  # You always want to specify the full path to the X server
  DEFAULT_XSERVER=${bindir}/X
  DEFAULT_XAUTH=xauth
-@@ -104,6 +105,20 @@ esac
+@@ -104,6 +105,22 @@ esac
  AC_SUBST(XINIT_CFLAGS)
  AC_SUBST(XINIT_LIBS)
  
@@ -40,6 +25,8 @@ index 1aee1d2..5775db3 100644
 +		[have_conkit=no; echo no])
 +	if test "x$have_conkit" = xyes ; then
 +		AC_DEFINE(USE_CONKIT, 1, [Define if you have ConsoleKit])
++		XINIT_CFLAGS="$XINIT_CFLAGS $CK_CFLAGS"
++		XINIT_LIBS="$XINIT_LIBS $CK_LIBS"
 +	fi
 +fi
 +
