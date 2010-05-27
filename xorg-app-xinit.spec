@@ -25,7 +25,7 @@ BuildRequires:	cpp
 BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-proto-inputproto-devel
-BuildRequires:	xorg-util-util-macros >= 0.99.2
+BuildRequires:	xorg-util-util-macros >= 1.3
 Requires:	/etc/X11/xinit/xinitrc
 Requires:	xorg-app-xauth
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
