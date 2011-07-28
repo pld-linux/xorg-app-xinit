@@ -1,12 +1,8 @@
-# FIXME:
-# - make it compatible with xinitrc-ng
-#   for example: /etc/X11/kdm/Xsession: line 42: exec: /etc/X11/xinit/Xclients: cannot execute: No such file or directory
-#
 Summary:	xinit application - X Window System initializer
 Summary(pl.UTF-8):	Aplikacja xinit do uruchamiania X Window System
 Name:		xorg-app-xinit
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	MIT
 Group:		X11/Applications
 Source0:	http://xorg.freedesktop.org/releases/individual/app/xinit-%{version}.tar.bz2
@@ -26,7 +22,7 @@ BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-proto-inputproto-devel
 BuildRequires:	xorg-util-util-macros >= 1.8
-Requires:	/etc/X11/xinit/xinitrc
+Requires:	xinitrc-ng
 Requires:	xorg-app-xauth
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -42,19 +38,6 @@ pierwszego programu klienckiego na systemach, które nie mogą uruchomić
 X bezpośrednio z inita lub w środowiskach używających wielu systemów
 okienkowych. Po zakończeniu pierwszego klienta xinit zabija serwer X i
 kończy działanie.
-
-%package xinitrc
-Summary:	xinitrc script provided by Xorg
-Summary(pl.UTF-8):	Skrypt xinitrc dostarczany z dystrybucją Xorg
-Group:		X11
-Provides:	xinitrc
-Obsoletes:	xinitrc
-
-%description xinitrc
-xinitrc script provided by Xorg.
-
-%description xinitrc -l pl.UTF-8
-Skrypt xinitrc dostarczany z dystrybucją Xorg.
 
 %prep
 %setup -q -n xinit-%{version}
@@ -83,6 +66,8 @@ install -D %{SOURCE2} $RPM_BUILD_ROOT%{_mandir}/pl/man1/startx.1x
 install -D %{SOURCE3} $RPM_BUILD_ROOT%{_mandir}/it/man1/xinit.1x
 install -D %{SOURCE4} $RPM_BUILD_ROOT%{_mandir}/pl/man1/xinit.1x
 
+%{__rm} $RPM_BUILD_ROOT/etc/X11/xinit/xinitrc
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -97,10 +82,3 @@ rm -rf $RPM_BUILD_ROOT
 %lang(it) %{_mandir}/it/man1/xinit.1x*
 %lang(pl) %{_mandir}/pl/man1/startx.1x*
 %lang(pl) %{_mandir}/pl/man1/xinit.1x*
-
-%if 0
-# Not finished. see TODO at start of spec
-%files xinitrc
-%defattr(644,root,root,755)
-%attr(755,root,root) /etc/X11/xinit/xinitrc
-%endif
