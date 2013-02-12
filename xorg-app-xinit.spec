@@ -2,7 +2,7 @@ Summary:	xinit application - X Window System initializer
 Summary(pl.UTF-8):	Aplikacja xinit do uruchamiania X Window System
 Name:		xorg-app-xinit
 Version:	1.3.2
-Release:	2
+Release:	3
 License:	MIT
 Group:		X11/Applications
 Source0:	http://xorg.freedesktop.org/releases/individual/app/xinit-%{version}.tar.bz2
@@ -22,9 +22,9 @@ BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	xorg-lib-libX11-devel
 BuildRequires:	xorg-proto-inputproto-devel
 BuildRequires:	xorg-util-util-macros >= 1.8
-Requires:	ConsoleKit-x11
 Requires:	xinitrc-ng
 Requires:	xorg-app-xauth
+Suggests:	ConsoleKit-x11
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
