@@ -50,9 +50,9 @@ index 42421ef..998c7f8 100644
  #if defined(__SCO__) || defined(__UNIXWARE__)
  if [ "$REMOTE_SERVER" = "TRUE" ]; then
          exec SHELL_CMD ${client}
---- xinit-1.3.0/xinit.c.orig	2010-10-31 10:39:31.355103290 +0100
-+++ xinit-1.3.0/xinit.c	2010-10-31 10:51:48.107104966 +0100
-@@ -41,6 +41,12 @@
+--- xinit-1.3.3/xinit.c.orig	2013-09-10 21:39:35.624565251 +0200
++++ xinit-1.3.3/xinit.c	2013-09-10 21:44:42.254552405 +0200
+@@ -41,6 +41,12 @@ in this Software without prior written a
  #include <setjmp.h>
  #include <stdarg.h>
  
@@ -65,11 +65,10 @@ index 42421ef..998c7f8 100644
  #ifdef __APPLE__
  #include <AvailabilityMacros.h>
  #if MAC_OS_X_VERSION_MIN_REQUIRED >= 1060
-@@ -395,6 +401,38 @@
-     return (serverpid != pidfound);
+@@ -559,6 +565,37 @@ setWindowPath(void)
+     free(newwindowpath);
  }
  
-+
 +#ifdef USE_CONKIT
 +static void
 +register_new_session_with_console_kit (void)
@@ -101,10 +100,10 @@ index 42421ef..998c7f8 100644
 +}
 +#endif /* USE_CONKIT */
 +
- static int
- startServer(char *server[])
+ static pid_t
+ startClient(char *client[])
  {
-@@ -568,6 +606,9 @@
+@@ -566,6 +603,9 @@ startClient(char *client[])
      if (clientpid == 0) {
          set_environment();
          setWindowPath();
@@ -114,7 +113,15 @@ index 42421ef..998c7f8 100644
  
          if (setuid(getuid()) == -1) {
              Error("cannot change uid");
-@@ -612,6 +653,13 @@
+@@ -586,6 +626,7 @@ startClient(char *client[])
+ 
+ static jmp_buf close_env;
+ 
++
+ static int
+ ignorexio(Display *dpy)
+ {
+@@ -610,6 +651,13 @@ shutdown(void)
              Error("can't send HUP to process group %d", clientpid);
      }
  
