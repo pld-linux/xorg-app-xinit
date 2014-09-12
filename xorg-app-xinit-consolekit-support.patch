@@ -10,9 +10,9 @@ index 1aee1d2..5775db3 100644
  # You always want to specify the full path to the X server
  DEFAULT_XSERVER=${bindir}/X
  DEFAULT_XAUTH=xauth
-@@ -104,6 +105,22 @@ esac
- AC_SUBST(XINIT_CFLAGS)
- AC_SUBST(XINIT_LIBS)
+@@ -151,6 +151,22 @@
+ esac
+ 
  
 +# Check for ConsoleKit
 +AC_ARG_WITH(consolekit,
@@ -32,14 +32,14 @@ index 1aee1d2..5775db3 100644
 +
  AC_PATH_PROGS(MCOOKIE, [mcookie], [$MCOOKIE],
    [$PATH:/bin:/usr/bin:/usr/lib:/usr/libexec:/usr/local/bin])
- if test "x$MCOOKIE" != x ; then
+ 
 diff --git a/startx.cpp b/startx.cpp
 index 42421ef..998c7f8 100644
 --- a/startx.cpp
 +++ b/startx.cpp
 @@ -222,6 +222,12 @@ EOF
-     fi
- done
+     done
+ fi
  
 +if [ x"$display" != x ]; then
 +    export DISPLAY=$display
