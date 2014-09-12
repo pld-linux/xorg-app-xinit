@@ -37,7 +37,7 @@ diff --git a/startx.cpp b/startx.cpp
 index 42421ef..998c7f8 100644
 --- a/startx.cpp
 +++ b/startx.cpp
-@@ -222,6 +222,12 @@ EOF
+@@ -301,6 +301,12 @@
      done
  fi
  
@@ -47,9 +47,9 @@ index 42421ef..998c7f8 100644
 +    export DISPLAY=:0
 +fi
 +
- #if defined(__SCO__) || defined(__UNIXWARE__)
- if [ "$REMOTE_SERVER" = "TRUE" ]; then
-         exec SHELL_CMD ${client}
+ #if defined(__APPLE__) || defined(__CYGWIN__)
+ eval XINIT \"$client\" $clientargs -- \"$server\" $display $serverargs
+ #else
 --- xinit-1.3.3/xinit.c.orig	2013-09-10 21:39:35.624565251 +0200
 +++ xinit-1.3.3/xinit.c	2013-09-10 21:44:42.254552405 +0200
 @@ -41,6 +41,12 @@ in this Software without prior written a
@@ -101,7 +101,7 @@ index 42421ef..998c7f8 100644
 +#endif /* USE_CONKIT */
 +
  static pid_t
- startClient(char *client[])
+ startClient(char *client_argv[])
  {
 @@ -566,6 +603,9 @@ startClient(char *client[])
      if (clientpid == 0) {
