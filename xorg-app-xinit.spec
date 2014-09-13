@@ -20,8 +20,8 @@ BuildRequires:	automake
 BuildRequires:	cpp
 BuildRequires:	pkgconfig >= 1:0.19
 BuildRequires:	xorg-lib-libX11-devel
-BuildRequires:	xorg-proto-inputproto-devel
-BuildRequires:	xorg-util-util-macros >= 1.8
+BuildRequires:	xorg-proto-xproto-devel >= 7.0.17
+BuildRequires:	xorg-util-util-macros >= 1.19
 Requires:	xinitrc-ng
 Requires:	xorg-app-xauth
 Suggests:	ConsoleKit-x11
