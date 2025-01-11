@@ -10,17 +10,17 @@ diff -urNp -x '*.orig' xinit-1.4.1.org/Makefile.am xinit-1.4.1/Makefile.am
  	-DSHELL_CMD=$(SHELL_CMD) $(STARTX_COOKIE_FLAGS) \
  	-D__libexecdir__="$(libexecdir)" \
  	-D__bindir__="$(bindir)" \
---- xinit-1.4.2/startx.cpp.orig	2022-12-29 20:14:29.369817248 +0100
-+++ xinit-1.4.2/startx.cpp	2022-12-29 20:15:04.276294810 +0100
-@@ -55,7 +55,7 @@ userserverrc=$HOME/.xserverrc
- [ -f "${XSERVERRC}" ] && userclientrc="${XSERVERRC}"
- sysserverrc=XINITDIR/xserverrc
- defaultclient=XTERM
--defaultserver=XSERVER
-+defaultserver=BINDIR/Xwrapper
- defaultclientargs=""
- defaultserverargs=""
- defaultdisplay=""
+--- xinit-1.4.3/startx.cpp.orig	2025-01-11 14:43:08.074323254 +0100
++++ xinit-1.4.3/startx.cpp	2025-01-11 14:44:52.763756103 +0100
+@@ -14,7 +14,7 @@ XCOMM
+ 
+ xinitdir=XINITDIR
+ xterm=XTERM
+-xserver=XSERVER
++xserver=BINDIR/Xwrapper
+ xinit=XINIT
+ bundle_id_prefix=BUNDLE_ID_PREFIX
+ xauth=XAUTH
 diff -urNp -x '*.orig' xinit-1.4.1.org/xinit.c xinit-1.4.1/xinit.c
 --- xinit-1.4.1.org/xinit.c	2019-03-03 19:58:11.000000000 +0000
 +++ xinit-1.4.1/xinit.c	2022-04-06 18:27:19.734543460 +0000
