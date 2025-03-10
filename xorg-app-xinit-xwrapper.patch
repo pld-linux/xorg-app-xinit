@@ -1,26 +1,21 @@
-diff -urNp -x '*.orig' xinit-1.4.1.org/Makefile.am xinit-1.4.1/Makefile.am
---- xinit-1.4.1.org/Makefile.am	2019-03-03 19:58:11.000000000 +0000
-+++ xinit-1.4.1/Makefile.am	2022-04-06 18:27:19.734543460 +0000
-@@ -49,7 +49,7 @@ PROGCPPDEFS = \
- 	-DXINIT=@XINIT@
+--- xinit-1.4.4/startx.in.orig	2025-03-09 21:44:26.000000000 +0100
++++ xinit-1.4.4/startx.in	2025-03-10 17:56:52.562463648 +0100
+@@ -16,7 +16,6 @@ prefix="@prefix@"
+ exec_prefix="@exec_prefix@"
+ xinitdir="@XINITDIR@"
+ xterm="@XTERM@"
+-xserver="@XSERVER@"
+ xinit="@XINIT@"
+ bundle_id_prefix="@bundleidprefix@"
+ xauth="@XAUTH@"
+@@ -24,6 +23,7 @@ bindir="@bindir@"
+ libexecdir="@libexecdir@"
+ mk_cookie="@MCOOKIE@"
+ has_cookie_maker="@HAS_COOKIE_MAKER@"
++xserver="${bindir}/Xwrapper"
  
- CPP_FILES_FLAGS = \
--	-DXINITDIR=$(XINITDIR) $(PROGCPPDEFS) -DLIBDIR=$(libdir) \
-+	-DXINITDIR=$(XINITDIR) $(PROGCPPDEFS) -DBINDIR=$(bindir) -DLIBDIR=$(libdir) \
- 	-DSHELL_CMD=$(SHELL_CMD) $(STARTX_COOKIE_FLAGS) \
- 	-D__libexecdir__="$(libexecdir)" \
- 	-D__bindir__="$(bindir)" \
---- xinit-1.4.3/startx.cpp.orig	2025-01-11 14:43:08.074323254 +0100
-+++ xinit-1.4.3/startx.cpp	2025-01-11 14:44:52.763756103 +0100
-@@ -14,7 +14,7 @@ XCOMM
+ unset SESSION_MANAGER
  
- xinitdir=XINITDIR
- xterm=XTERM
--xserver=XSERVER
-+xserver=BINDIR/Xwrapper
- xinit=XINIT
- bundle_id_prefix=BUNDLE_ID_PREFIX
- xauth=XAUTH
 diff -urNp -x '*.orig' xinit-1.4.1.org/xinit.c xinit-1.4.1/xinit.c
 --- xinit-1.4.1.org/xinit.c	2019-03-03 19:58:11.000000000 +0000
 +++ xinit-1.4.1/xinit.c	2022-04-06 18:27:19.734543460 +0000

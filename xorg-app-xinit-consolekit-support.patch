@@ -33,9 +33,9 @@ index 1aee1d2..5775db3 100644
  AC_PATH_PROGS(MCOOKIE, [mcookie], [$MCOOKIE],
    [$PATH:/bin:/usr/bin:/usr/lib:/usr/libexec:/usr/local/bin])
  
---- xinit-1.4.3/startx.cpp.orig	2025-01-11 14:45:20.903603656 +0100
-+++ xinit-1.4.3/startx.cpp	2025-01-11 15:07:03.739878920 +0100
-@@ -317,6 +317,8 @@ EOF
+--- xinit-1.4.4/startx.in.orig	2025-03-10 17:56:52.562463648 +0100
++++ xinit-1.4.4/startx.in	2025-03-10 18:01:27.337512430 +0100
+@@ -319,6 +319,8 @@ EOF
      done
  fi
  
@@ -43,7 +43,7 @@ index 1aee1d2..5775db3 100644
 +
  case "$(uname -s)" in
  CYGWIN_NT*|Darwin)
-     eval $xinit \"$client\" $clientargs -- \"$server\" $display $serverargs
+     eval "$xinit" \"$client\" $clientargs -- \"$server\" $display $serverargs
 --- xinit-1.4.3/xinit.c.orig	2025-01-11 14:45:20.893603711 +0100
 +++ xinit-1.4.3/xinit.c	2025-01-11 14:45:20.906936972 +0100
 @@ -43,6 +43,12 @@ in this Software without prior written a
